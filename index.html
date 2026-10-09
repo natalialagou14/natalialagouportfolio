@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Natalia Lagou</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Natalia Lagou — Product Designer in Athens. Selected work from the BOX merchant app: order acceptance, ingredient availability, and the design system underneath both.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============ tokens — same neutrals as the case studies, light is the base ============ */
+:root {
+  --paper:      #F5F3F1;
+  --surface:    #FFFFFF;
+  --surface-2:  #EFECE8;
+  --ink:        #17161A;
+  --ink-2:      #423E3A;
+  --muted:      #6E6A64;
+  --line:       #E3DFDA;
+  --line-2:     #D2CCC4;
+
+  /* the three BOX channel colours — the projects are indexed by them */
+  --orders:     #E0761A;  --orders-b:     #FBEBD8;
+  --catalogue:  #1683B8;  --catalogue-b:  #DCEEF8;
+  --system:     #6E5DD6;  --system-b:     #E7E3FA;
+
+  --shadow: 0 1px 2px rgba(23,22,26,.05), 0 8px 24px -12px rgba(23,22,26,.14);
+
+  --f-display: "Archivo", "Noto Sans", system-ui, sans-serif;
+  --f-body: "Literata", "Noto Serif", Georgia, serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --col: 66ch;
+  --pad: clamp(20px, 5vw, 56px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #131216;
+    --surface:    #1B1A1F;
+    --surface-2:  #24222A;
+    --ink:        #EFEBE5;
+    --ink-2:      #C6C0B8;
+    --muted:      #948D84;
+    --line:       #2E2C34;
+    --line-2:     #3D3A44;
+
+    --orders:     #F79B41;  --orders-b:     #38260F;
+    --catalogue:  #4FB4E2;  --catalogue-b:  #102C3B;
+    --system:     #A294F2;  --system-b:     #241E44;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  --paper:      #131216;
+  --surface:    #1B1A1F;
+  --surface-2:  #24222A;
+  --ink:        #EFEBE5;
+  --ink-2:      #C6C0B8;
+  --muted:      #948D84;
+  --line:       #2E2C34;
+  --line-2:     #3D3A44;
+
+  --orders:     #F79B41;  --orders-b:     #38260F;
+  --catalogue:  #4FB4E2;  --catalogue-b:  #102C3B;
+  --system:     #A294F2;  --system-b:     #241E44;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+
+/* ============ base ============ */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 2px solid var(--orders); outline-offset: 3px; border-radius: 3px; }
+img { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.14; }
+p { margin: 0; }
+
+.eyebrow {
+  font-family: var(--f-display); font-size: .69rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
+}
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+a { color: inherit; }
+
+/* ============ shell ============ */
+.shell { max-width: 1080px; margin: 0 auto; padding: 0 var(--pad); }
+
+/* ============ masthead — a letterhead, name left, reach-out right ============ */
+.masthead {
+  display: grid; gap: clamp(28px, 5vw, 56px);
+  padding: clamp(56px, 10vw, 104px) 0 clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 800px) {
+  .masthead { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+}
+.hello {
+  font-size: clamp(2.5rem, 7.4vw, 4.6rem);
+  font-weight: 700; letter-spacing: -.036em; line-height: 1.02;
+}
+.hello .comma { color: var(--orders); }
+.role {
+  margin-top: 14px;
+  font-family: var(--f-display); font-size: clamp(1rem, 2.1vw, 1.22rem);
+  font-weight: 500; letter-spacing: -.008em; color: var(--ink-2);
+}
+
+.reach { display: flex; flex-direction: column; gap: 9px; }
+.reach-h { margin-bottom: 3px; }
+.reach a, .reach span {
+  font-family: var(--f-mono); font-size: .84rem; letter-spacing: -.01em;
+  color: var(--ink-2); text-decoration: none;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.reach a { text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+.reach a:hover { color: var(--orders); text-decoration-color: var(--orders); }
+.reach .k {
+  font-size: .64rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--muted); min-width: 5.4em; flex: none; text-decoration: none;
+}
+
+/* ============ generic section ============ */
+section { padding: clamp(44px, 7vw, 76px) 0; border-bottom: 1px solid var(--line); }
+.sec-h {
+  font-size: clamp(1.28rem, 2.6vw, 1.6rem); font-weight: 600; letter-spacing: -.022em;
+  margin-bottom: 24px;
+}
+.prose { max-width: var(--col); color: var(--ink-2); }
+.prose + .prose { margin-top: 1em; }
+
+/* ============ selected work — rows, not cards ============ */
+.work { display: flex; flex-direction: column; }
+.project { border-top: 1px solid var(--line); }
+.project:first-child { border-top: 0; }
+
+.project-head {
+  display: grid; gap: 6px 28px;
+  padding: clamp(26px, 4vw, 38px) 0 clamp(26px, 4vw, 38px) clamp(16px, 2.4vw, 26px);
+  border-left: 3px solid var(--c);
+  text-decoration: none;
+}
+a.project-head { display: grid; }
+a.project-head:hover .project-title { color: var(--c); }
+@media (min-width: 880px) {
+  .project-head { grid-template-columns: minmax(0, 1fr) 15.5rem; align-items: start; }
+}
+
+.project-kicker {
+  font-family: var(--f-display); font-size: .69rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--c);
+}
+.project-title {
+  font-family: var(--f-display); font-size: clamp(1.55rem, 3.6vw, 2.3rem);
+  font-weight: 600; letter-spacing: -.028em; line-height: 1.08;
+  margin-top: 8px; transition: color .15s;
+}
+.project-thesis {
+  margin-top: 12px; max-width: 46ch; color: var(--ink-2);
+  font-size: 1.02rem; line-height: 1.52;
+}
+.project-side {
+  display: flex; flex-direction: column; gap: 7px;
+  margin-top: 16px;
+}
+@media (min-width: 880px) { .project-side { margin-top: 12px; } }
+.spec {
+  font-family: var(--f-mono); font-size: .76rem; line-height: 1.45;
+  color: var(--muted); font-variant-numeric: tabular-nums;
+  display: flex; gap: 9px;
+}
+.spec b { color: var(--ink-2); font-weight: 500; }
+.project-go {
+  margin-top: 8px; font-family: var(--f-display); font-size: .8rem; font-weight: 600;
+  letter-spacing: .02em; color: var(--c);
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.project-go::after { content: "→"; transition: transform .15s; }
+a.project-head:hover .project-go::after { transform: translateX(3px); }
+
+/* ============ experience — a dated ladder, because it is one ============ */
+.ladder { display: flex; flex-direction: column; max-width: 44rem; }
+.rung {
+  display: grid; gap: 2px 20px; padding: 14px 0 14px 22px;
+  border-left: 1px solid var(--line-2); position: relative;
+}
+.rung::before {
+  content: ""; position: absolute; left: -4.5px; top: 21px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--line-2);
+}
+.rung.now::before { background: var(--orders); border-color: var(--orders); }
+.rung.now .rung-title { color: var(--ink); }
+@media (min-width: 620px) {
+  .rung { grid-template-columns: minmax(0, 1fr) 13rem; align-items: baseline; }
+}
+.rung-title { font-family: var(--f-display); font-size: 1.04rem; font-weight: 600; letter-spacing: -.012em; }
+.rung-when { font-family: var(--f-mono); font-size: .77rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.employer {
+  font-family: var(--f-display); font-size: .95rem; font-weight: 600;
+  letter-spacing: -.008em; margin-bottom: 4px;
+}
+.employer span { color: var(--muted); font-weight: 500; }
+
+/* ============ practice grid ============ */
+.practice { display: grid; gap: clamp(26px, 4vw, 40px); }
+@media (min-width: 720px) { .practice { grid-template-columns: repeat(3, 1fr); } }
+.pcol-h { margin-bottom: 12px; }
+.plist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.plist li {
+  font-family: var(--f-mono); font-size: .82rem; color: var(--ink-2);
+  padding-left: 15px; position: relative; line-height: 1.5;
+}
+.plist li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 5px; height: 1.5px; background: var(--line-2);
+}
+.plist li em { font-style: normal; color: var(--muted); }
+
+/* ============ the joke, set as a dry footnote ============ */
+.survival {
+  margin-top: clamp(34px, 5vw, 48px);
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 10px; padding: clamp(18px, 3vw, 28px);
+  max-width: 46rem;
+}
+.survival-h { margin-bottom: 14px; }
+.survival ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+@media (min-width: 680px) { .survival ul { grid-template-columns: 1fr 1fr; gap: 9px 26px; } }
+.survival li {
+  font-family: var(--f-mono); font-size: .8rem; line-height: 1.5; color: var(--ink-2);
+  display: flex; gap: 10px; align-items: baseline;
+}
+.survival li .e { flex: none; font-family: var(--f-body); }
+
+/* ============ education ============ */
+.edu { display: flex; flex-direction: column; gap: 18px; max-width: 44rem; }
+.edu-item { display: grid; gap: 2px 20px; }
+@media (min-width: 620px) { .edu-item { grid-template-columns: minmax(0, 1fr) 13rem; align-items: baseline; } }
+.edu-title { font-family: var(--f-display); font-size: 1.02rem; font-weight: 600; letter-spacing: -.012em; }
+.edu-where { font-size: .92rem; color: var(--muted); }
+.edu-when { font-family: var(--f-mono); font-size: .77rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ============ footer ============ */
+footer { padding: clamp(48px, 7vw, 80px) 0 clamp(56px, 8vw, 96px); border-bottom: 0; }
+.foot-line {
+  font-family: var(--f-display); font-size: clamp(1.4rem, 3.4vw, 2rem);
+  font-weight: 600; letter-spacing: -.026em; max-width: 20ch;
+}
+.foot-sub { margin-top: 14px; color: var(--ink-2); max-width: 34ch; }
+.foot-links { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.foot-links a {
+  font-family: var(--f-mono); font-size: .84rem; color: var(--ink-2);
+  text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px;
+}
+.foot-links a:hover { color: var(--orders); text-decoration-color: var(--orders); }
+.colophon {
+  margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+  font-family: var(--f-mono); font-size: .71rem; color: var(--muted); line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <h1 class="hello">Hello<span class="comma">,</span><br>I&rsquo;m Natalia</h1>
+      <p class="role">Product Designer — admin tools, multi-role platforms, and the systems underneath them</p>
+    </div>
+    <div class="reach">
+      <p class="eyebrow reach-h">Reach out</p>
+      <a href="mailto:natalia.lagou@hotmail.com"><span class="k">Email</span>natalia.lagou@hotmail.com</a>
+      <a href="tel:+306987884748"><span class="k">Phone</span>+30 6987 884 748</a>
+      <span><span class="k">Based in</span>Athens, Greece</span>
+    </div>
+  </header>
+
+  <section id="work">
+    <h2 class="sec-h">Selected work</h2>
+    <div class="work">
+
+      <article class="project" style="--c: var(--orders);">
+        <a class="project-head" href="orders/index.html">
+          <div>
+            <p class="project-kicker">Merchant app · Order acceptance</p>
+            <h3 class="project-title">Incoming Orders</h3>
+            <p class="project-thesis">The five minutes a shop has to accept an order — and the promise it makes when it does.</p>
+          </div>
+          <div class="project-side">
+            <p class="spec"><b>23</b> screens, mobile and desktop</p>
+            <p class="spec"><b>3</b> fulfilment channels</p>
+            <p class="spec"><b>5</b> order states, one on a timer</p>
+            <p class="project-go">Read the case study</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="project" style="--c: var(--catalogue);">
+        <a class="project-head" href="ingredients/index.html">
+          <div>
+            <p class="project-kicker">Merchant app · Catalogue availability</p>
+            <h3 class="project-title">Ingredient Availability</h3>
+            <p class="project-thesis">The espresso beans ran out at 11am. One switch has to take them off sixty-nine dishes before the next order lands.</p>
+          </div>
+          <div class="project-side">
+            <p class="spec"><b>15</b> screens, mobile and desktop</p>
+            <p class="spec"><b>3</b> availability states, not two</p>
+            <p class="spec"><b>1</b> switch reaching every product</p>
+            <p class="project-go">Read the case study</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="project" style="--c: var(--system);">
+        <a class="project-head" href="design-system/index.html">
+          <div>
+            <p class="project-kicker">Figma library · Product &amp; UX design</p>
+            <h3 class="project-title">Design System</h3>
+            <p class="project-thesis">One library, four atomic levels, and a token under every value a screen can set.</p>
+          </div>
+          <div class="project-side">
+            <p class="spec"><b>4</b> atomic levels, atoms to pages</p>
+            <p class="spec"><b>4</b> token layers under every screen</p>
+            <p class="spec"><b>1</b> library behind both case studies</p>
+            <p class="project-go">Read the case study</p>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="sec-h">About me</h2>
+    <p class="prose">Product Designer with 5+ years of experience crafting digital products across B2B and B2C environments, specialising in admin tools, multi-role platforms, and mobile and web experiences. At Desquared I designed the admin tool for the BOX food delivery app, serving four distinct user roles, and led the full design process from research and concept through wireframes, high-fidelity UI, stakeholder presentations, and UAT.</p>
+    <p class="prose">Currently working within the Telekom product team, gaining hands-on experience in B2C product development and collaborating closely with a cross-functional Scrum team.</p>
+  </section>
+
+  <section id="experience">
+    <h2 class="sec-h">Work experience</h2>
+    <p class="employer">Desquared <span>· Digital Products</span></p>
+    <div class="ladder">
+      <div class="rung now">
+        <p class="rung-title">Product Designer</p>
+        <p class="rung-when">May 2024 — Present</p>
+      </div>
+      <div class="rung">
+        <p class="rung-title">UI/UX Designer</p>
+        <p class="rung-when">May 2021 — May 2024</p>
+      </div>
+      <div class="rung">
+        <p class="rung-title">Content Agent</p>
+        <p class="rung-when">Nov 2019 — Apr 2021</p>
+      </div>
+    </div>
+    <p class="prose" style="margin-top: 22px;">Sole designer for the BOX food delivery admin tool, owning end-to-end design from research and concept through developer handoff. Designed for four user roles, conducted on-site and remote user research and usability testing, coordinated UAT, and built and maintained the design system.</p>
+  </section>
+
+  <section id="practice">
+    <h2 class="sec-h">Practice</h2>
+    <div class="practice">
+      <div>
+        <p class="eyebrow pcol-h">Skill set</p>
+        <ul class="plist">
+          <li>Design systems</li>
+          <li>User personas</li>
+          <li>User journeys</li>
+          <li>Wireframing</li>
+          <li>Prototyping</li>
+          <li>Photography</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow pcol-h">Tools</p>
+        <ul class="plist">
+          <li>Figma</li>
+          <li>Claude Code</li>
+          <li>Visual Studio Code</li>
+          <li>Xcode</li>
+          <li>Notion</li>
+          <li>Photoshop, Illustrator, InDesign</li>
+          <li>Sketch</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow pcol-h">Languages</p>
+        <ul class="plist">
+          <li>Greek <em>— native</em></li>
+          <li>English <em>— fluent</em></li>
+          <li>French <em>— threshold</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="survival">
+      <p class="eyebrow survival-h">Specialisations in product survival</p>
+      <ul>
+        <li><span class="e">🧱</span> Building design systems nobody uses</li>
+        <li><span class="e">🐣</span> Becoming a UX designer from scratch</li>
+        <li><span class="e">🧟‍♂️</span> Surviving stakeholder feedback without crying</li>
+        <li><span class="e">🎭</span> Pretending I know what the developer just said</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section id="education">
+    <h2 class="sec-h">Education</h2>
+    <div class="edu">
+      <div class="edu-item">
+        <div>
+          <p class="edu-title">Bachelor of Arts — Photography and Audiovisual Arts</p>
+          <p class="edu-where">University of West Attica · School of Applied Arts &amp; Culture</p>
+        </div>
+        <p class="edu-when">Oct 2012 — Feb 2016</p>
+      </div>
+      <div class="edu-item">
+        <div>
+          <p class="edu-title">Erasmus Exchange — Art and Design</p>
+          <p class="edu-where">ESAD Orléans · College of Art and Design, France</p>
+        </div>
+        <p class="edu-when">Sep 2014 — Jul 2015</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h2 class="foot-line">Thank you for your time</h2>
+    <p class="foot-sub">Happy to talk about admin tools nobody else wants to design.</p>
+    <div class="foot-links">
+      <a href="mailto:natalia.lagou@hotmail.com">natalia.lagou@hotmail.com</a>
+      <a href="tel:+306987884748">+30 6987 884 748</a>
+    </div>
+    <p class="colophon">Natalia Lagou · Product Designer · Athens, Greece<br>All screens in the case studies are from the production Greek build of the BOX merchant app.</p>
+  </footer>
+
+</div>
+
+<script>
+/* Remember where you were on this page, so coming back from a case study
+   returns you to the same spot instead of the top. */
+(function () {
+  var KEY = 'nl:work-scroll';
+
+  function read() {
+    try { return parseInt(sessionStorage.getItem(KEY), 10); } catch (e) { return NaN; }
+  }
+  function save() {
+    try { sessionStorage.setItem(KEY, String(Math.round(window.scrollY))); } catch (e) {}
+  }
+
+  var target = read();
+  var restoring = !isNaN(target) && target > 0;
+
+  function restore() {
+    if (!restoring) return;
+    /* only nudge if we are not already there — avoids fighting a user who
+       started scrolling before the fonts finished loading */
+    if (Math.abs(window.scrollY - target) > 2) window.scrollTo(0, target);
+  }
+
+  if (restoring) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    restore();
+    /* the page has no images, but web fonts can still change its height */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(restore);
+    window.addEventListener('load', restore);
+    /* stop restoring the moment the reader takes over */
+    window.addEventListener('wheel', function () { restoring = false; }, { passive: true, once: true });
+    window.addEventListener('touchstart', function () { restoring = false; }, { passive: true, once: true });
+    window.addEventListener('keydown', function () { restoring = false; }, { once: true });
+  }
+
+  window.addEventListener('pagehide', save);
+  window.addEventListener('beforeunload', save);
+})();
+</script>
+
+</body></html>
